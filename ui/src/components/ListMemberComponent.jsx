@@ -1,38 +1,31 @@
 import { DataGrid } from "@material-ui/data-grid";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import MemberService from "../services/MemberService";
+import { useTranslation } from "react-i18next";
 
-const columns = [
-  { field: "name", headerName: "NAME" },
-  { field: "department", headerName: "DEPARTMENT" },
-];
+function ListMemberComponent() {
+  const { t } = useTranslation();
 
-export default class ListMemberComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      members: [],
-    };
-  }
+  const columns = [
+    { field: "id", headerName: "ID", width: 200 },
+    { field: "name", headerName: "NAME", width: 200 },
+    { field: "department", headerName: "DEPARTMENT", width: 200 },
+  ];
 
-  componentDidMount() {
+  const [members, setMembers] = useState([]);
+  useEffect(() => {
     MemberService.getMembers().then((response) => {
-      this.setState({ members: response.data });
+      setMembers(response.data);
     });
-  }
-
-  render() {
-    return (
-      <div>
-        <div style={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={this.state.members}
-            columns={columns}
-            pageSize={5}
-            // onCellClick={(name) => alert("AAA")}
-          />
-        </div>
+  }, []);
+  return (
+    <div>
+      <h2>{t("MEMBER_LIST")}</h2>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid rows={members} columns={columns} />
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+export default ListMemberComponent;

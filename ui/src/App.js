@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent";
+import FooterComponent from "./components/FooterComponent";
 import ListMemberComponent from "./components/ListMemberComponent";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
             <Route path="/members" component={ListMemberComponent}></Route>
           </Switch>
         </div>
-        {/* <FooterComponent/> */}
+        <FooterComponent />
       </Router>
     </div>
   );
