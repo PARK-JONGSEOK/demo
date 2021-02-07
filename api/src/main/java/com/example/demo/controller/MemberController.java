@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
+@CrossOrigin("http://localhost:3000")
 public class MemberController {
 
 	private final Logger logger = LoggerFactory.getLogger(MemberController.class);
